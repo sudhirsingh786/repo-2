@@ -6,6 +6,9 @@ resource "google_service_account" "this" {
 output "service_account_email" {
   value = google_service_account.this.email
 }
+output "state_change_marker" {
+  value = timestamp()
+}
 
 module "labels" {
   source = "git::https://github.com/sudhirsingh786/repo-3.git?ref=bucket-label-test"
