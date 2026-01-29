@@ -3,6 +3,11 @@ resource "google_service_account" "this" {
   display_name = "Service Account ${var.sa_name}"
   project      = var.project_id
 }
+resource "google_project_iam_member" "sa_viewer" {
+  project = var.project_id
+  role    = "roles/viewer"
+  member  = "serviceAccount:${google_service_account.this.email}"
+}
 
 module "labels" {
   source = "git::https://github.com/sudhirsingh786/repo-3.git?ref=bucket-label-test"
